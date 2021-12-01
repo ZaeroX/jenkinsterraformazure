@@ -45,7 +45,7 @@ resource "azurerm_resource_group" "tf_jenkins" {
 # }
 
 resource "azurerm_app_service_plan" "svcplan" {
-  for_each = toset(azurerm_resource_group.tf_jenkins)
+  for_each = {for rg in  azurerm_resource_group.tf_jenkins: rg.name => rg}
   name                = "serviceplantfjenkins"
   location            = "azurerm_resource_group.tf_jenkins${each.key}.location"
   resource_group_name = "azurerm_resource_group.tf_jenkins${each.key}.name"
@@ -57,7 +57,7 @@ resource "azurerm_app_service_plan" "svcplan" {
 }
 
 resource "azurerm_app_service" "appsvc" {
-  for_each = toset(azurerm_resource_group.tf_jenkins)
+  for_each = {for rg in  azurerm_resource_group.tf_jenkins: rg.name => rg}
   name                = "appservicetfjenkins"
   location            = "azurerm_resource_group.tf_jenkins${each.key}.location"
   resource_group_name = "azurerm_resource_group.tf_jenkins${each.key}.name"
