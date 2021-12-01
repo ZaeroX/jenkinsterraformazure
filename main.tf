@@ -61,7 +61,7 @@ resource "azurerm_app_service" "appsvc" {
   name                = "appservicetfjenkins"
   location            = "azurerm_resource_group.tf_jenkins${each.key}.location"
   resource_group_name = "azurerm_resource_group.tf_jenkins${each.key}.name"
-  app_service_plan_id = azurerm_app_service_plan.svcplan.id
+  app_service_plan_id = "azurerm_app_service_plan.svcplan${each.key}.id"
 
 
   site_config {
