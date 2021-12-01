@@ -9,10 +9,14 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
-# provider "azurerm" {
-#   features {}
-#   skip_provider_registration = true
-# }
+provider "azurerm" {
+  tenant_id       = "a0f7e0b9-e7c4-461f-b7cd-b14b2d3cadc4"
+  subscription_id = "d3a83b07-1138-454e-8bbe-071a1b79a51d"
+  client_id       = "fb611b70-bde0-408f-ba9a-45ad16cf7b9c"
+  client_secret   = "pT-TM.VKt9FAHhpsD732lp3Vk4Jos.mRdd"
+  features {}
+  skip_provider_registration = true
+}
 
 resource "azurerm_resource_group" "tf_jenkins" {
   name     = "tfjenkins"
