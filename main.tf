@@ -14,8 +14,8 @@ terraform {
 #   skip_provider_registration = true
 # }
 
-resource "azurerm_resource_group" "tf_test" {
-  name     = "tfacloudguru"
+resource "azurerm_resource_group" "tf_jenkins" {
+  name     = "tfjenkins"
   location = "Central US"
 }
 
@@ -40,7 +40,7 @@ resource "azurerm_resource_group" "tf_test" {
 # }
 
 resource "azurerm_app_service_plan" "svcplan" {
-  name                = "Enter App Service Plan name"
+  name                = "serviceplantfjenkins"
   location            = azurerm_resource_group.tf_test.location
   resource_group_name = azurerm_resource_group.tf_test.name
 
@@ -51,7 +51,7 @@ resource "azurerm_app_service_plan" "svcplan" {
 }
 
 resource "azurerm_app_service" "appsvc" {
-  name                = "Enter Web App Service Name"
+  name                = "appservicetfjenkins"
   location            = azurerm_resource_group.tf_test.location
   resource_group_name = azurerm_resource_group.tf_test.name
   app_service_plan_id = azurerm_app_service_plan.svcplan.id
