@@ -13,3 +13,9 @@ variable "client_id" {
 variable "client_secret" {
     type = string
 }
+
+variable "resource_group_count" {
+    type = number
+    default = 1
+}
+

@@ -19,6 +19,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "tf_jenkins" {
+  count    = var.resource_group_count
   name     = "tfjenkins"
   location = "Central US"
 }
