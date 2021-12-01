@@ -45,9 +45,10 @@ resource "azurerm_resource_group" "tf_jenkins" {
 # }
 
 resource "azurerm_app_service_plan" "svcplan" {
+  for_each = azurerm_resource_group.tf_jenkins
   name                = "serviceplantfjenkins"
-  location            = azurerm_resource_group.tf_jenkins[0].location
-  resource_group_name = azurerm_resource_group.tf_jenkins[0].name
+  location            = "azurerm_resource_group.tf_jenkins${each.key}.location"
+  resource_group_name = "azurerm_resource_group.tf_jenkins${each.key}.name"
 
   sku {
     tier = "Standard"
@@ -56,9 +57,10 @@ resource "azurerm_app_service_plan" "svcplan" {
 }
 
 resource "azurerm_app_service" "appsvc" {
+  for_each = azurerm_resource_group.tf_jenkins
   name                = "appservicetfjenkins"
-  location            = azurerm_resource_group.tf_jenkins[0].location
-  resource_group_name = azurerm_resource_group.tf_jenkins[0].name
+  location            = "azurerm_resource_group.tf_jenkins${each.key}.location"
+  resource_group_name = "azurerm_resource_group.tf_jenkins${each.key}.name"
   app_service_plan_id = azurerm_app_service_plan.svcplan.id
 
 
@@ -67,6 +69,7 @@ resource "azurerm_app_service" "appsvc" {
     scm_type                 = "LocalGit"
   }
 }
+
 
 
 
